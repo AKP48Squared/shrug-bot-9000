@@ -7,7 +7,7 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 }
 
 ShrugBot9000.prototype.handleCommand = function(context) {
-  if (context.command === 'rl') {
+  if (context.command() === 'rl') {
     return global.AKP48.reload();
   }
 };
