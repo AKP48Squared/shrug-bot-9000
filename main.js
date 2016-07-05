@@ -5,29 +5,30 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
   }
 }
 
-ShrugBot9000.prototype.handleCommand = function (context) {
-  global.logger.silly(`${this.name}: Received command.`);
+ShrugBot9000.prototype.handleCommand = function(context) {
+  if (context.command === 'rl') {
+    return global.AKP48.reload();
+  }
+};
 
-  var command = context.command();
+ShrugBot9000.prototype.handleMessage = function (context) {
+  var text = context.text().toLowerCase();
   context.setCustomData('noPrefix', true);
 
-  switch(command) {
-    case 'shrug':
-    case 'shrug*':
-      return context.reply(`¯\\_(ツ)_/¯`);
-    case 'lenny':
-      return context.reply(`( ͡° ͜ʖ ͡°)`);
-    case 'lod':
-    case 'disapproval':
-    case 'lookofdisapproval':
-      return context.reply(`ಠ_ಠ`);
-    case 'csi':
-    case 'pun':
-    case 'glasses':
-    case 'yeaaaa':
-      return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
-    case 'rl':
-      return global.AKP48.reload();
+  if(text.includes('shrug')) {
+    return context.reply(`¯\\_(ツ)_/¯`);
+  }
+
+  if(text.includes('lenny')) {
+    return context.reply(`( ͡° ͜ʖ ͡°)`);
+  }
+
+  if(text.includes('lod') || text.includes('disapproval') || text.includes('lookofdisapproval')) {
+    return context.reply(`ಠ_ಠ`);
+  }
+
+  if(text.includes('csi') || text.includes('pun') || text.includes('glasses') || text.includes('yeaaaa')) {
+    return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
   }
 };
 
