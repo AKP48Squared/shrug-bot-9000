@@ -20,6 +20,11 @@ ShrugBot9000.prototype.handleCommand = function (context) {
     case 'disapproval':
     case 'lookofdisapproval':
       return context.reply(`ಠ_ಠ`);
+    case 'csi':
+    case 'pun':
+    case 'glasses':
+    case 'yeaaaa':
+      return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
     case 'rl':
       return global.AKP48.reload();
   }
