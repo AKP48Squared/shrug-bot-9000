@@ -10,8 +10,13 @@ ShrugBot9000.prototype.handleCommand = function (context) {
 
   var command = context.command();
 
-  if(command === "shrug") {
-    return context.reply('¯\\_(ツ)_/¯');
+  if(command === 'shrug') {
+    var noun = '';
+    context.setCustomData('noPrefix', true);
+    if(context.argText().length) {
+      noun = `${context.argText()}: `;
+    }
+    return context.reply(`${noun}¯\\_(ツ)_/¯`);
   }
 };
 
