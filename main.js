@@ -13,6 +13,7 @@ ShrugBot9000.prototype.handleCommand = function (context) {
 
   switch(command) {
     case 'shrug':
+    case 'shrug*':
       return context.reply(`¯\\_(ツ)_/¯`);
     case 'lenny':
       return context.reply(`( ͡° ͜ʖ ͡°)`);
