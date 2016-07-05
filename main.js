@@ -9,18 +9,19 @@ ShrugBot9000.prototype.handleCommand = function (context) {
   global.logger.silly(`${this.name}: Received command.`);
 
   var command = context.command();
+  context.setCustomData('noPrefix', true);
 
-  if(command === 'shrug') {
-    var noun = '';
-    context.setCustomData('noPrefix', true);
-    if(context.argText().length) {
-      noun = `${context.argText()}: `;
-    }
-    return context.reply(`${noun}¯\\_(ツ)_/¯`);
-  }
-
-  if(command === 'shrug' && context.permissions().includes('AKP48.op')) {
-    global.AKP48.reload();
+  switch(command) {
+    case 'shrug':
+      return context.reply(`¯\\_(ツ)_/¯`);
+    case 'lenny':
+      return context.reply(`( ͡° ͜ʖ ͡°)`);
+    case 'lod':
+    case 'disapproval':
+    case 'lookofdisapproval':
+      return context.reply(`ಠ_ಠ`);
+    case 'rl':
+      return global.AKP48.reload();
   }
 };
 
