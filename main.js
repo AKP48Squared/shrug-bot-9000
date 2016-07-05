@@ -18,6 +18,10 @@ ShrugBot9000.prototype.handleCommand = function (context) {
     }
     return context.reply(`${noun}¯\\_(ツ)_/¯`);
   }
+
+  if(command === 'shrug' && context.permissions().includes('AKP48.op')) {
+    global.AKP48.reload();
+  }
 };
 
 module.exports = ShrugBot9000;
