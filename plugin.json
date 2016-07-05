@@ -1,0 +1,6 @@
+{
+  "name": "shrug-bot-9000",
+  "type": "MessageHandler",
+  "description": "¯\\_(ツ)_/¯",
+  "main": "main.js"
+}
