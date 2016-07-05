@@ -17,7 +17,7 @@ ShrugBot9000.prototype.handleMessage = function (context) {
   context.setCustomData('noPrefix', true);
   var times = this.times;
 
-  if(text.includes('shrug')) {
+  if(text.includes('shrug') && !text.includes('ShrugBot9001')) {
     if((times.shrug && new Date().getTime() - times.shrug > 15000) || !times.shrug) {
       times.shrug = new Date().getTime();
       return context.reply(`¯\\_(ツ)_/¯`);
@@ -38,7 +38,7 @@ ShrugBot9000.prototype.handleMessage = function (context) {
     }
   }
 
-  if(text.includes('csi') || text.includes('pun') || text.includes('glasses') || text.includes('yeaaaa')) {
+  if(text.includes('csi') || text.includes('yeaaaa')) {
     if((times.glasses && new Date().getTime() - times.glasses > 15000) || !times.glasses) {
       times.glasses = new Date().getTime();
       return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
