@@ -9,7 +9,7 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 ShrugBot9000.prototype.handleCommand = function(context) {
   context.setCustomData('noPrefix', true);
 
-  switch(context.command()) {
+  switch(context.command().toLowerCase()) {
     case 'shrug':
       return this.shrug(context);
     case 'lenny':
