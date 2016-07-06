@@ -37,25 +37,25 @@ ShrugBot9000.prototype.handleMessage = function (context) {
   var responses = [];
 
   for (var i = 0; i < text.length; i++) {
-    if(text.includes('shrug') && !text.includes('ShrugBot9001')) {
+    if(text[i].includes('shrug') && !text[i].includes('ShrugBot9001')) {
       responses.push('shrug');
     }
 
-    if(text.includes('lenny')) {
+    if(text[i].includes('lenny')) {
       responses.push('lenny');
     }
 
-    if(text.includes('lod') || text.includes('disapproval') || text.includes('lookofdisapproval')) {
+    if(text[i].includes('lod') || text[i].includes('disapproval') || text[i].includes('lookofdisapproval')) {
       responses.push('lod');
     }
 
-    if(text.includes('csi') || text.includes('yeaaaa')) {
+    if(text[i].includes('csi') || text[i].includes('yeaaaa')) {
       responses.push('csi');
     }
   }
 
-  for (var i = 0; i < responses.length; i++) {
-    this[responses[i]](context);
+  for (var j = 0; j < responses.length; j++) {
+    this[responses[j]](context);
   }
 };
 
