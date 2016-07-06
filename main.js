@@ -2,7 +2,9 @@
 class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
   constructor(AKP48) {
     super(AKP48, 'ShrugBot9000');
-    this.times = {};
+    if(!global.shrugTimes) {
+      global.shrugTimes = {};
+    }
   }
 }
 
@@ -30,39 +32,46 @@ ShrugBot9000.prototype.handleCommand = function(context) {
 };
 
 ShrugBot9000.prototype.handleMessage = function (context) {
-  var text = context.text().toLowerCase();
+  var text = context.text().toLowerCase().split(' ');
   context.setCustomData('noPrefix', true);
+  var responses = [];
 
-  if(text.includes('shrug') && !text.includes('ShrugBot9001')) {
-    this.shrug(context);
+  for (var i = 0; i < text.length; i++) {
+    if(text.includes('shrug') && !text.includes('ShrugBot9001')) {
+      responses.push('shrug');
+    }
+
+    if(text.includes('lenny')) {
+      responses.push('lenny');
+    }
+
+    if(text.includes('lod') || text.includes('disapproval') || text.includes('lookofdisapproval')) {
+      responses.push('lod');
+    }
+
+    if(text.includes('csi') || text.includes('yeaaaa')) {
+      responses.push('csi');
+    }
   }
 
-  if(text.includes('lenny')) {
-    this.lenny(context);
-  }
-
-  if(text.includes('lod') || text.includes('disapproval') || text.includes('lookofdisapproval')) {
-    this.lod(context);
-  }
-
-  if(text.includes('csi') || text.includes('yeaaaa')) {
-    this.csi(context);
+  for (var i = 0; i < responses.length; i++) {
+    this[responses[i]](context);
   }
 };
 
 ShrugBot9000.prototype.canSend = function (cmd, to) {
-  var times = this.times[cmd];
+  var times = global.shrugTimes[cmd];
   if(!times) {
-    this.times[cmd] = {};
-    this.times[cmd][to] = Date.now();
+    global.shrugTimes[cmd] = {};
+    global.shrugTimes[cmd][to] = Date.now();
     return true;
   }
   if(!times[to]) {
-    this.times[cmd][to] = Date.now();
+    global.shrugTimes[cmd][to] = Date.now();
     return true;
   }
   if(Date.now() - times[to] > 15000) {
-    this.times[cmd][to] = Date.now();
+    global.shrugTimes[cmd][to] = Date.now();
     return true;
   }
   return false;
