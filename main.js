@@ -7,42 +7,88 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 }
 
 ShrugBot9000.prototype.handleCommand = function(context) {
-  if (context.command() === 'rl') {
-    return global.AKP48.reload();
+  context.setCustomData('noPrefix', true);
+
+  switch(context.command()) {
+    case 'shrug':
+      return this.shrug();
+    case 'lenny':
+      return this.lenny();
+    case 'lod':
+    case 'disapproval':
+    case 'lookofdisapproval':
+      return this.lod();
+    case 'glasses':
+    case 'csi':
+      return this.csi();
+    case 'rl':
+    case 'reload':
+      return global.AKP48.reload();
+    default:
+      return;
   }
 };
 
 ShrugBot9000.prototype.handleMessage = function (context) {
   var text = context.text().toLowerCase();
   context.setCustomData('noPrefix', true);
-  var times = this.times;
 
   if(text.includes('shrug') && !text.includes('ShrugBot9001')) {
-    if((times.shrug && new Date().getTime() - times.shrug > 15000) || !times.shrug) {
-      times.shrug = new Date().getTime();
-      return context.reply(`¯\\_(ツ)_/¯`);
-    }
+    this.shrug(context);
   }
 
   if(text.includes('lenny')) {
-    if((times.lenny && new Date().getTime() - times.lenny > 15000) || !times.lenny) {
-      times.lenny = new Date().getTime();
-      return context.reply(`( ͡° ͜ʖ ͡°)`);
-    }
+    this.lenny(context);
   }
 
   if(text.includes('lod') || text.includes('disapproval') || text.includes('lookofdisapproval')) {
-    if((times.lod && new Date().getTime() - times.lod > 15000) || !times.lod) {
-      times.lod = new Date().getTime();
-      return context.reply(`ಠ_ಠ`);
-    }
+    this.lod(context);
   }
 
   if(text.includes('csi') || text.includes('yeaaaa')) {
-    if((times.glasses && new Date().getTime() - times.glasses > 15000) || !times.glasses) {
-      times.glasses = new Date().getTime();
-      return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
-    }
+    this.csi(context);
+  }
+};
+
+ShrugBot9000.prototype.canSend = function (cmd, to) {
+  var times = this.times[cmd];
+  if(!times) {
+    this.times[cmd] = {};
+    this.times[cmd][to] = Date.now();
+    return true;
+  }
+  if(!times[to]) {
+    this.times[cmd][to] = Date.now();
+    return true;
+  }
+  if(Date.now() - times[to] > 15000) {
+    this.times[cmd][to] = Date.now();
+    return true;
+  }
+  return false;
+};
+
+ShrugBot9000.prototype.shrug = function (context) {
+  if(this.canSend('shrug', context.to())) {
+    return context.reply(`¯\\_(ツ)_/¯`);
+  }
+};
+
+ShrugBot9000.prototype.lenny = function (context) {
+  if(this.canSend('lenny', context.to())) {
+    return context.reply(`( ͡° ͜ʖ ͡°)`);
+  }
+};
+
+ShrugBot9000.prototype.lod = function (context) {
+  if(this.canSend('lod', context.to())) {
+    return context.reply(`ಠ_ಠ`);
+  }
+};
+
+ShrugBot9000.prototype.csi = function (context) {
+  if(this.canSend('csi', context.to())) {
+    return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
   }
 };
 
