@@ -5,24 +5,18 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
     if(!global.shrugTimes) {
       global.shrugTimes = {};
     }
+    this.data = require('./shrug.json');
   }
 }
 
 ShrugBot9000.prototype.handleCommand = function(context) {
   context.setCustomData('noPrefix', true);
 
+  if(this.data[context.command()]) {
+    return this.reply(context.command(), this.data[context.command()], context);
+  }
+
   switch(context.command().toLowerCase()) {
-    case 'shrug':
-      return this.shrug(context);
-    case 'lenny':
-      return this.lenny(context);
-    case 'lod':
-    case 'disapproval':
-    case 'lookofdisapproval':
-      return this.lod(context);
-    case 'glasses':
-    case 'csi':
-      return this.csi(context);
     case 'rl':
     case 'reload':
       return global.AKP48.reload();
@@ -34,28 +28,11 @@ ShrugBot9000.prototype.handleCommand = function(context) {
 ShrugBot9000.prototype.handleMessage = function (context) {
   var text = context.text().toLowerCase().split(' ');
   context.setCustomData('noPrefix', true);
-  var responses = [];
 
   for (var i = 0; i < text.length; i++) {
-    if(text[i].includes('shrug') && !text[i].includes('ShrugBot9001')) {
-      responses.push('shrug');
+    if(this.data[text[i]]) {
+      this.reply(text[i], this.data[context.command()], context);
     }
-
-    if(text[i].includes('lenny')) {
-      responses.push('lenny');
-    }
-
-    if(text[i].includes('lod') || text[i].includes('disapproval') || text[i].includes('lookofdisapproval')) {
-      responses.push('lod');
-    }
-
-    if(text[i].includes('csi') || text[i].includes('yeaaaa')) {
-      responses.push('csi');
-    }
-  }
-
-  for (var j = 0; j < responses.length; j++) {
-    this[responses[j]](context);
   }
 };
 
@@ -77,27 +54,9 @@ ShrugBot9000.prototype.canSend = function (cmd, to) {
   return false;
 };
 
-ShrugBot9000.prototype.shrug = function (context) {
-  if(this.canSend('shrug', context.to())) {
-    return context.reply(`¯\\_(ツ)_/¯`);
-  }
-};
-
-ShrugBot9000.prototype.lenny = function (context) {
-  if(this.canSend('lenny', context.to())) {
-    return context.reply(`( ͡° ͜ʖ ͡°)`);
-  }
-};
-
-ShrugBot9000.prototype.lod = function (context) {
-  if(this.canSend('lod', context.to())) {
-    return context.reply(`ಠ_ಠ`);
-  }
-};
-
-ShrugBot9000.prototype.csi = function (context) {
-  if(this.canSend('csi', context.to())) {
-    return context.reply(`(•_•) ( •_•)>⌐■-■ (⌐■_■)`);
+ShrugBot9000.prototype.reply = function (cmd, msg, context) {
+  if(this.canSend(cmd, context.to())) {
+    return context.reply(msg);
   }
 };
 
