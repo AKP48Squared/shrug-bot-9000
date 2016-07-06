@@ -11,16 +11,16 @@ ShrugBot9000.prototype.handleCommand = function(context) {
 
   switch(context.command()) {
     case 'shrug':
-      return this.shrug();
+      return this.shrug(context);
     case 'lenny':
-      return this.lenny();
+      return this.lenny(context);
     case 'lod':
     case 'disapproval':
     case 'lookofdisapproval':
-      return this.lod();
+      return this.lod(context);
     case 'glasses':
     case 'csi':
-      return this.csi();
+      return this.csi(context);
     case 'rl':
     case 'reload':
       return global.AKP48.reload();
