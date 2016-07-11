@@ -12,7 +12,7 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 ShrugBot9000.prototype.handleCommand = function(context) {
   context.setCustomData('noPrefix', true);
   if(this.data[context.command()]) {
-    return this.reply(context.command(), this.data[context.command()], context);
+    return this.reply(context.command(), this.data[context.command()].replace('{text}', context.argText()), context);
   }
 
   switch(context.command().toLowerCase()) {
@@ -30,7 +30,7 @@ ShrugBot9000.prototype.handleMessage = function (context) {
 
   for (var i = 0; i < text.length; i++) {
     if(this.data[text[i]]) {
-      this.reply(text[i], this.data[text[i]], context);
+      this.reply(text[i], this.data[text[i]].replace('{text}', context.argText()), context);
     }
   }
 };
