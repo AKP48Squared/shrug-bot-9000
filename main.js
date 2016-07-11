@@ -29,8 +29,8 @@ ShrugBot9000.prototype.handleMessage = function (context) {
   var text = context.text().toLowerCase().split(' ');
 
   for (var i = 0; i < text.length; i++) {
-    if(this.data[text[i]]) {
-      this.reply(text[i], this.data[text[i]].replace('{text}', context.argText()), context);
+    if(this.data[text[i]] && !this.data[text[i]].includes('{text}')) {
+      this.reply(text[i], this.data[text[i]], context);
     }
   }
 };
