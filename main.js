@@ -27,10 +27,12 @@ ShrugBot9000.prototype.handleCommand = function(context) {
 ShrugBot9000.prototype.handleMessage = function (context) {
   context.setCustomData('noPrefix', true);
   var text = context.text().toLowerCase().split(' ');
-
-  for (var i = 0; i < text.length; i++) {
+  var sendCount = 0;
+  
+  for (var i = 0; i < text.length && sendCount < 2; i++) {
     if(this.data[text[i]] && !this.data[text[i]].includes('{text}')) {
       this.reply(text[i], this.data[text[i]], context);
+      sendCount++;
     }
   }
 };
