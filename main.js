@@ -14,7 +14,7 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 ShrugBot9000.prototype.handleCommand = function(context) {
   context.setCustomData('noPrefix', true);
   if(this.data[context.command()]) {
-    return this.reply(context.command(), this.data[context.command()].replace('{text}', context.argText()).replace('{flip}', flip(context.argText())), context);
+    return this.reply(context.command(), this.data[context.command()].replace('{text}', context.argText()).replace('{flip}', flip(context.argText()) || '┻━┻'), context);
   }
 
   switch(context.command().toLowerCase()) {
