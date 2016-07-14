@@ -22,4 +22,7 @@
     "url": "https://github.com/AKP48Squared/shrug-bot-9000/issues"
   },
   "homepage": "https://github.com/AKP48Squared/shrug-bot-9000",
+  "dependencies": {
+    "flip-text": "^1.1.0"
+  }
 }
