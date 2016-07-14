@@ -1,4 +1,6 @@
 'use strict';
+var flip = require('flip-text');
+
 class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
   constructor(AKP48) {
     super(AKP48, 'ShrugBot9000');
@@ -12,7 +14,7 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 ShrugBot9000.prototype.handleCommand = function(context) {
   context.setCustomData('noPrefix', true);
   if(this.data[context.command()]) {
-    return this.reply(context.command(), this.data[context.command()].replace('{text}', context.argText()), context);
+    return this.reply(context.command(), this.data[context.command()].replace('{text}', context.argText()).replace('{flip}', flip(context.argText())), context);
   }
 
   switch(context.command().toLowerCase()) {
@@ -30,8 +32,8 @@ ShrugBot9000.prototype.handleMessage = function (context) {
   var sendCount = 0;
   
   for (var i = 0; i < text.length && sendCount < 2; i++) {
-    if(this.data[text[i]] && !this.data[text[i]].includes('{text}')) {
-      this.reply(text[i], this.data[text[i]], context);
+    if(this.data[text[i]]) {
+      this.reply(text[i], this.data[text[i]].replace('{text}', '').replace('{flip}', '┻━┻'), context);
       sendCount++;
     }
   }
