@@ -13,8 +13,8 @@ class ShrugBot9000 extends global.AKP48.pluginTypes.MessageHandler {
 
 ShrugBot9000.prototype.handleCommand = function(context) {
   context.setCustomData('noPrefix', true);
-  if(this.data[context.command()]) {
-    return this.reply(context.command(), this.data[context.command()].replace('{text}', context.argText()).replace('{flip}', flip(context.argText()) || '🙃'), context);
+  if(this.data.commands[context.command()]) {
+    return this.reply(context.command(), this.data.commands[context.command()].replace('{text}', context.argText()).replace('{flip}', flip(context.argText()) || '🙃'), context);
   }
 
   switch(context.command().toLowerCase()) {
@@ -32,11 +32,16 @@ ShrugBot9000.prototype.handleMessage = function (context) {
   var sendCount = 0;
 
   for (var i = 0; i < text.length && sendCount < 2; i++) {
-    if(this.data[text[i]]) {
-      this.reply(text[i], this.data[text[i]].replace('{text}', '').replace('{flip}', '🙃'), context);
+    var w = this.getWord(text[i], this.data.words);
+    if(w) {
+      this.reply(text[i], w, context);
       sendCount++;
     }
   }
+};
+
+ShrugBot9000.prototype.getWord = function (word, list) {
+  return list[word.toLowerCase()] || false;
 };
 
 ShrugBot9000.prototype.canSend = function (cmd, to) {
