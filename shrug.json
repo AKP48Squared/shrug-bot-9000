@@ -1,17 +1,41 @@
 {
-	"words": {
-		"shrug": "¯\\_(ツ)_/¯",
-		"lenny": "( ͡° ͜ʖ ͡°)",
-		"csi": "(•_•) ( •_•)>⌐■-■ (⌐■_■)",
-		"lod": "ಠ_ಠ",
-		"sface": "(;°O°)omg!!!",
-		"tableflip": "(╯°□°）╯︵ ┻━┻",
-		"tablefix": "┬─┬ノ( º _ ºノ)",
-		"fuckit": "ᕕ( ᐛ )ᕗ"
-	},
-	"commands": {
-		"pointface": "(☞ﾟヮﾟ)☞ {text}",
-		"flip": "(╯°□°）╯︵ {flip}",
-		"fix": "{text}ノ( º _ ºノ)"
-	}
+  "words": [
+    {
+      "name": "shrug",
+      "output": "¯\\_(ツ)_/¯"
+    },
+    {
+      "name": "lenny",
+      "output": "( ͡° ͜ʖ ͡°)"
+    },
+    {
+      "name": "csi",
+      "output": "(•_•) ( •_•)>⌐■-■ (⌐■_■)"
+    },
+    {
+      "name": "lod",
+      "output": "ಠ_ಠ"
+    },
+    {
+      "name": "sface",
+      "output": "(;°O°)omg!!!"
+    },
+    {
+      "name": "tableflip",
+      "output": "(╯°□°）╯︵ ┻━┻"
+    },
+    {
+      "name": "tablefix",
+      "output": "┬─┬ノ( º _ ºノ)"
+    },
+    {
+      "name": "fuckit",
+      "output": "ᕕ( ᐛ )ᕗ"
+    }
+  ],
+  "commands": {
+    "pointface": "(☞ﾟヮﾟ)☞ {text}",
+    "flip": "(╯°□°）╯︵ {flip}",
+    "fix": "{text}ノ( º _ ºノ)"
+  }
 }

@@ -41,7 +41,11 @@ ShrugBot9000.prototype.handleMessage = function (context) {
 };
 
 ShrugBot9000.prototype.getWord = function (word, list) {
-  return list[word.toLowerCase()] || false;
+  for (var i = 0; i < list.length; i++) {
+    if(list[i].name.toLowerCase().includes(word.toLowerCase())) {
+      return list[i].output;
+    }
+  }
 };
 
 ShrugBot9000.prototype.canSend = function (cmd, to) {
