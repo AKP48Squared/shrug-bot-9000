@@ -42,7 +42,7 @@ ShrugBot9000.prototype.handleMessage = function (context) {
 
 ShrugBot9000.prototype.getWord = function (word, list) {
   for (var i = 0; i < list.length; i++) {
-    if(list[i].name.toLowerCase().includes(word.toLowerCase())) {
+    if(word.toLowerCase().includes(list[i].name.toLowerCase())) {
       return list[i].output;
     }
   }
