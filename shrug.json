@@ -2,7 +2,8 @@
   "words": [
     {
       "name": "shrug",
-      "output": "¯\\_(ツ)_/¯"
+      "output": "¯\\_(ツ)_/¯",
+      "nomatch": "ShrugBot"
     },
     {
       "name": "lenny",

@@ -34,7 +34,7 @@ ShrugBot9000.prototype.handleMessage = function (context) {
   for (var i = 0; i < text.length && sendCount < 2; i++) {
     var w = this.getWord(text[i], this.data.words);
     if(w) {
-      this.reply(text[i], w, context);
+      this.reply(w.name, w.output, context);
       sendCount++;
     }
   }
@@ -43,9 +43,13 @@ ShrugBot9000.prototype.handleMessage = function (context) {
 ShrugBot9000.prototype.getWord = function (word, list) {
   for (var i = 0; i < list.length; i++) {
     if(word.toLowerCase().includes(list[i].name.toLowerCase())) {
-      return list[i].output;
+      if(list[i].nomatch && word.toLowerCase().includes(list[i].nomatch.toLowerCase())) {
+        return false;
+      }
+      return list[i];
     }
   }
+  return false;
 };
 
 ShrugBot9000.prototype.canSend = function (cmd, to) {
