@@ -37,6 +37,8 @@
   "commands": {
     "pointface": "(☞ﾟヮﾟ)☞ {text}",
     "flip": "(╯°□°）╯︵ {flip}",
-    "fix": "{text}ノ( º _ ºノ)"
+    "fix": "{text}ノ( º _ ºノ)",
+    "listemotes": "See https://github.com/AKP48Squared/shrug-bot-9000/blob/master/shrug.json",
+    "listshrugs": "See https://github.com/AKP48Squared/shrug-bot-9000/blob/master/shrug.json"
   }
 }
